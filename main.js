@@ -7,9 +7,25 @@ http
     let q = url.parse(req.url, true);
     let filename = "./pages/" + q.pathname;
 
+    // this is a super ugly if statement, I'm sure there is a much nicer way of laying this out but I'm not sure how
+
     if (q.pathname === "/") {
       console.log("default detected");
       fs.readFile("./pages/index.html", function (err, data) {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.write(data);
+        return res.end();
+      });
+    } else if (q.pathname === "/about") {
+      console.log("about url detected");
+      fs.readFile("./pages/about.html", function (err, data) {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.write(data);
+        return res.end();
+      });
+    } else if (q.pathname === "/contact-me") {
+      console.log("contact-me url detected");
+      fs.readFile("./pages/contact-me.html", function (err, data) {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.write(data);
         return res.end();
