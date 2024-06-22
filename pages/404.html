@@ -3,10 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer>
+      function handleHomeClick() {
+        window.location.href = "http://localhost:8080/index.html";
+      }
+    </script>
     <title>404 Error</title>
   </head>
   <body>
     <h1>404 page not found</h1>
-    <button>Back home</button>
+    <button onclick="handleHomeClick()">Back home</button>
   </body>
 </html>

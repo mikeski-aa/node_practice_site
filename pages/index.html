@@ -3,11 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer>
+      function handleContactClick() {
+        window.location.href = "http://localhost:8080/contact-me.html";
+      }
+
+      function handleAboutClick() {
+        window.location.href = "http://localhost:8080/about.html";
+      }
+    </script>
+    <link rel="stylesheet" href="../styles/style.css" />
     <title>Home</title>
   </head>
   <body>
     <h1>Homepage</h1>
-    <button>Contact me</button>
-    <button>About</button>
+    <p>
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio
+      molestiae quam minus cumque accusamus explicabo saepe provident sit sed
+      voluptatum error delectus illum asperiores quos doloremque quaerat facilis
+      suscipit beatae ea, repellat quasi placeat consequuntur. Eius eaque
+      voluptatibus quia doloribus eligendi, architecto accusamus perspiciatis
+      nemo maiores quibusdam blanditiis mollitia nisi? Cum, tempore facere modi
+      quam, minus debitis voluptatum accusamus necessitatibus pariatur
+      reiciendis ratione. Voluptatum, eius laborum a perferendis, in recusandae
+      facilis molestiae corrupti, neque velit numquam! Repudiandae voluptatum
+      totam tempore vitae voluptate necessitatibus consequatur recusandae quam
+      possimus, quibusdam pariatur eum hic in sapiente dolorem dolor. Delectus
+      officia praesentium quo a?
+    </p>
+    <button class="contactBtn" onclick="handleContactClick()">
+      Contact me
+    </button>
+    <button class="aboutBtn" onclick="handleAboutClick()">About</button>
   </body>
 </html>
