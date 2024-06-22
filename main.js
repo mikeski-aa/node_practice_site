@@ -17,12 +17,22 @@ http
     } else {
       fs.readFile(filename, function (err, data) {
         if (err) {
-          res.writeHead(404, { "Content-Type": "text/html" });
-          return res.end("404 Not Found");
+          console.log("going into error");
+          fs.readFile("./pages/404.html", function (err, errorData) {
+            if (err) {
+              res.writeHead(500, { "Content-Type": "text/html" });
+              res.write("Internal server error");
+              return res.end();
+            }
+            res.writeHead(404, { "Content-Type": "text/html" });
+            res.write(errorData);
+            return res.end();
+          });
+        } else {
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.write(data);
+          return res.end();
         }
-        res.writeHead(404, { "Content-Type": "text/html" });
-        res.write(data);
-        return res.end();
       });
     }
   })
