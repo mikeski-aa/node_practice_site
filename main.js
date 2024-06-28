@@ -1,55 +1,78 @@
+const express = require("express");
+const app = express();
+const port = 3000;
 let http = require("http");
 let url = require("url");
 let fs = require("fs");
 
-http
-  .createServer(function (req, res) {
-    let q = url.parse(req.url, true);
-    let filename = "./pages/" + q.pathname;
+app.get("/", (req, res) => {
+  fs.readFile("./pages/index.html", function (err, data) {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.write(data);
+    return res.end();
+  });
+});
 
-    // this is a super ugly if statement, I'm sure there is a much nicer way of laying this out but I'm not sure how
+app.get("/about", (req, res) => {
+  fs.readFile("./pages/about.html", function (err, data) {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.write(data);
+    return res.end();
+  });
+});
 
-    if (q.pathname === "/") {
-      console.log("default detected");
-      fs.readFile("./pages/index.html", function (err, data) {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
-        return res.end();
-      });
-    } else if (q.pathname === "/about") {
-      console.log("about url detected");
-      fs.readFile("./pages/about.html", function (err, data) {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
-        return res.end();
-      });
-    } else if (q.pathname === "/contact-me") {
-      console.log("contact-me url detected");
-      fs.readFile("./pages/contact-me.html", function (err, data) {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
-        return res.end();
-      });
-    } else {
-      fs.readFile(filename, function (err, data) {
-        if (err) {
-          console.log("going into error");
-          fs.readFile("./pages/404.html", function (err, errorData) {
-            if (err) {
-              res.writeHead(500, { "Content-Type": "text/html" });
-              res.write("Internal server error");
-              return res.end();
-            }
-            res.writeHead(404, { "Content-Type": "text/html" });
-            res.write(errorData);
-            return res.end();
-          });
-        } else {
-          res.writeHead(200, { "Content-Type": "text/html" });
-          res.write(data);
-          return res.end();
-        }
-      });
-    }
-  })
-  .listen(8080);
+app.listen(port, () => {
+  console.log(`Listening to port ${port}`);
+});
+
+// http
+//   .createServer(function (req, res) {
+//     let q = url.parse(req.url, true);
+//     let filename = "./pages/" + q.pathname;
+
+//     // this is a super ugly if statement, I'm sure there is a much nicer way of laying this out but I'm not sure how
+
+//     if (q.pathname === "/") {
+//       console.log("default detected");
+//       fs.readFile("./pages/index.html", function (err, data) {
+//         res.writeHead(200, { "Content-Type": "text/html" });
+//         res.write(data);
+//         return res.end();
+//       });
+//     } else if (q.pathname === "/about") {
+//       console.log("about url detected");
+//       fs.readFile("./pages/about.html", function (err, data) {
+//         res.writeHead(200, { "Content-Type": "text/html" });
+//         res.write(data);
+//         return res.end();
+//       });
+//     } else if (q.pathname === "/contact-me") {
+//       console.log("contact-me url detected");
+//       fs.readFile("./pages/contact-me.html", function (err, data) {
+//         res.writeHead(200, { "Content-Type": "text/html" });
+//         res.write(data);
+//         return res.end();
+//       });
+//     } else {
+//       fs.readFile(filename, function (err, data) {
+//         if (err) {
+//           console.log("going into error");
+//           fs.readFile("./pages/404.html", function (err, errorData) {
+//             if (err) {
+//               res.writeHead(500, { "Content-Type": "text/html" });
+//               res.write("Internal server error");
+//               return res.end();
+//             }
+//             res.writeHead(404, { "Content-Type": "text/html" });
+//             res.write(errorData);
+//             return res.end();
+//           });
+//         } else {
+//           res.writeHead(200, { "Content-Type": "text/html" });
+//           res.write(data);
+//           return res.end();
+//         }
+//       });
+//     }
+//   })
+//   .listen(8080);
