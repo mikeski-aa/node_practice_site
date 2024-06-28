@@ -15,10 +15,10 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/contact-me", (req, res) => {
-  res.sendFile(path.join(__dirname, "./pages/cpmtact-me.html"));
+  res.sendFile(path.join(__dirname, "./pages/contact-me.html"));
 });
 
-app.use((req, res) => {
+app.get("*", (req, res) => {
   // This route will match any unmatched route and serve error.html
   res.sendFile(path.join(__dirname, "pages", "404.html"));
 });
