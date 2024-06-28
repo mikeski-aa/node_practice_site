@@ -1,24 +1,26 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const port = 3000;
-let http = require("http");
-let url = require("url");
-let fs = require("fs");
+// let http = require("http");
+// let url = require("url");
+// let fs = require("fs");
 
 app.get("/", (req, res) => {
-  fs.readFile("./pages/index.html", function (err, data) {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(data);
-    return res.end();
-  });
+  res.sendFile(path.join(__dirname, "./pages/index.html"));
 });
 
 app.get("/about", (req, res) => {
-  fs.readFile("./pages/about.html", function (err, data) {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(data);
-    return res.end();
-  });
+  res.sendFile(path.join(__dirname, "./pages/about.html"));
+});
+
+app.get("/contact-me", (req, res) => {
+  res.sendFile(path.join(__dirname, "./pages/cpmtact-me.html"));
+});
+
+app.use((req, res) => {
+  // This route will match any unmatched route and serve error.html
+  res.sendFile(path.join(__dirname, "pages", "404.html"));
 });
 
 app.listen(port, () => {
